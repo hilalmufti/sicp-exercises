@@ -40,8 +40,8 @@
 (define (a-plus-abs-b a b)
   ((if (> b 0) + -) a b))
   #|
-  If b is strictly positive, it returns a + b.
-  Otherwise, it returns a - b.
+  If b is strictly positive, the procedure returns a + b.
+  Otherwise, the procedure returns a - b.
   |#
 
 ; Exercise 1.5 
@@ -55,6 +55,23 @@
   ; What is the behavior of (test 0 (p))?
 
 #|
-  Applicative-order evaluation:
-  Normal-order evaluation: 
+  Applicative-order evaluation: (test 0 (p)) results in infinite recursion, since (p) is evaluated
+  Normal-order evaluation: (test 0 (p)) returns 0, since (p) is never evaluated).
 |# 
+
+; Exercise 1.6
+#|
+  (define (new-if predicate then-clause else-clause)
+    (cond (predicate then-clause)
+      (else else-clause)))
+  
+  (new-if (= 2 3) 0 5) -> 5
+
+  (new-if (= 1 1) 0 5) -> 0
+
+  (define (sqrt-iter guess x)
+    (new-if (good-enough? guess x)
+            guess
+            (sqrt-iter (improve guess x)
+                       x)))
+|#
