@@ -74,4 +74,9 @@
             guess
             (sqrt-iter (improve guess x)
                        x)))
+  
+  This results in infinite recursion, since the interpreter will use applicative-order evaluation 
+  to evaluate the arguments to new-if, since it is a user-define procedure rather than a special form.
+  This will result in the interpreter evaluating sqrt-iter endlessly, since both branches of new-if
+  are evaluated, unlike in the original definition of if.
 |#
